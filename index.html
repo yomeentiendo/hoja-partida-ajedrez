@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hoja de Partida de Ajedrez</title>
+
+    <meta
+        name="description"
+        content="Hoja web interactiva para anotar, visualizar e imprimir partidas de ajedrez."
+    >
+</head>
+
+<body>
+
+    <header>
+        <h1>Hoja de Partida de Ajedrez</h1>
+        <p>Anota, visualiza, guarda e imprime tus partidas.</p>
+    </header>
+
+    <main>
+
+        <!-- DATOS DE LA PARTIDA -->
+        <section>
+            <h2>Datos de la partida</h2>
+
+            <label>
+                Fecha
+                <input type="date" id="fecha">
+            </label>
+
+            <label>
+                Evento o torneo
+                <input type="text" id="evento">
+            </label>
+
+            <label>
+                Tipo de partida
+                <select id="tipo-partida">
+                    <option value="">Seleccionar</option>
+                    <option>Amistosa</option>
+                    <option>Torneo</option>
+                    <option>Liga</option>
+                    <option>Entrenamiento</option>
+                    <option>Online</option>
+                    <option>Simultánea</option>
+                    <option>Otra</option>
+                </select>
+            </label>
+
+            <label>
+                Lugar o plataforma
+                <input type="text" id="lugar">
+            </label>
+
+            <label>
+                Ronda
+                <input type="text" id="ronda">
+            </label>
+
+            <label>
+                Tablero
+                <input type="text" id="tablero">
+            </label>
+
+            <label>
+                Ritmo de juego
+                <select id="ritmo">
+                    <option value="">Seleccionar</option>
+                    <option>Clásico</option>
+                    <option>Rápido</option>
+                    <option>Blitz</option>
+                    <option>Bullet</option>
+                    <option>Personalizado</option>
+                </select>
+            </label>
+
+            <label>
+                Control de tiempo
+                <input
+                    type="text"
+                    id="control-tiempo"
+                    placeholder="Ejemplo: 10+5"
+                >
+            </label>
+
+            <label>
+                Apertura o defensa
+                <input type="text" id="apertura">
+            </label>
+
+            <label>
+                Código ECO
+                <input type="text" id="eco">
+            </label>
+
+        </section>
+
+
+        <!-- JUGADORES -->
+        <section>
+            <h2>Jugadores</h2>
+
+            <article>
+                <h3>⚪ Blancas</h3>
+
+                <label>
+                    Nombre
+                    <input type="text" id="blancas-nombre">
+                </label>
+
+                <label>
+                    Elo
+                    <input type="number" id="blancas-elo">
+                </label>
+
+                <label>
+                    Ranking
+                    <input type="text" id="blancas-ranking">
+                </label>
+
+                <label>
+                    Club o equipo
+                    <input type="text" id="blancas-club">
+                </label>
+            </article>
+
+            <article>
+                <h3>⚫ Negras</h3>
+
+                <label>
+                    Nombre
+                    <input type="text" id="negras-nombre">
+                </label>
+
+                <label>
+                    Elo
+                    <input type="number" id="negras-elo">
+                </label>
+
+                <label>
+                    Ranking
+                    <input type="text" id="negras-ranking">
+                </label>
+
+                <label>
+                    Club o equipo
+                    <input type="text" id="negras-club">
+                </label>
+            </article>
+
+        </section>
+
+
+        <!-- TABLERO -->
+        <section>
+            <h2>Tablero</h2>
+
+            <div id="tablero-ajedrez">
+                <p>El tablero interactivo se incorporará en el siguiente paso.</p>
+            </div>
+
+            <p>
+                Turno:
+                <strong id="turno-actual">Blancas</strong>
+            </p>
+
+            <button type="button">⏮ Inicio</button>
+            <button type="button">◀ Anterior</button>
+            <button type="button">Siguiente ▶</button>
+            <button type="button">Final ⏭</button>
+            <button type="button">Girar tablero</button>
+        </section>
+
+
+        <!-- INTRODUCCIÓN DE MOVIMIENTOS -->
+        <section>
+            <h2>Anotar movimiento</h2>
+
+            <label>
+                Tipo de notación
+                <select id="tipo-notacion">
+                    <option value="san">
+                        Algebraica estándar — Ejemplo: Cf3
+                    </option>
+
+                    <option value="coordenadas">
+                        Coordenadas — Ejemplo: g1-f3
+                    </option>
+                </select>
+            </label>
+
+            <label>
+                Movimiento
+                <input
+                    type="text"
+                    id="movimiento"
+                    placeholder="Ejemplo: e4"
+                >
+            </label>
+
+            <button type="button" id="añadir-movimiento">
+                Añadir movimiento
+            </button>
+
+            <p>
+                Traducción:
+                <strong id="traduccion-movimiento">—</strong>
+            </p>
+
+            <p id="mensaje-movimiento"></p>
+        </section>
+
+
+        <!-- TABLA DE MOVIMIENTOS -->
+        <section>
+            <h2>Planilla de movimientos</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nº</th>
+                        <th>Blancas</th>
+                        <th>Tiempo</th>
+                        <th>Negras</th>
+                        <th>Tiempo</th>
+                    </tr>
+                </thead>
+
+                <tbody id="lista-movimientos">
+                    <tr>
+                        <td>1</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+        <!-- RESULTADO -->
+        <section>
+            <h2>Resultado</h2>
+
+            <label>
+                Resultado de la partida
+                <select id="resultado">
+                    <option value="">Seleccionar</option>
+                    <option value="1-0">1-0 — Ganan blancas</option>
+                    <option value="0-1">0-1 — Ganan negras</option>
+                    <option value="1/2-1/2">½-½ — Tablas</option>
+                    <option value="*">Partida en curso</option>
+                </select>
+            </label>
+
+            <label>
+                Motivo
+                <select id="motivo-resultado">
+                    <option value="">Seleccionar</option>
+                    <option>Jaque mate</option>
+                    <option>Abandono</option>
+                    <option>Tiempo agotado</option>
+                    <option>Tablas acordadas</option>
+                    <option>Ahogado</option>
+                    <option>Repetición de posición</option>
+                    <option>Material insuficiente</option>
+                    <option>Otro</option>
+                </select>
+            </label>
+        </section>
+
+
+        <!-- OBSERVACIONES -->
+        <section>
+            <h2>Observaciones</h2>
+
+            <textarea
+                id="observaciones"
+                rows="6"
+                placeholder="Comentarios, incidencias o notas sobre la partida..."
+            ></textarea>
+        </section>
+
+
+        <!-- ACCIONES -->
+        <section>
+            <h2>Acciones</h2>
+
+            <button type="button">Nueva partida</button>
+            <button type="button">Guardar</button>
+            <button type="button">Cargar PGN</button>
+            <button type="button">Exportar PGN</button>
+            <button type="button" onclick="window.print()">
+                Imprimir
+            </button>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Hoja de Partida de Ajedrez</p>
+    </footer>
+
+</body>
+</html>
